@@ -12,6 +12,6 @@ yarn lint ||
     false;
 )
 
-echo '🎉 No error found: committing this now.... ✨🚀'
+echo '✨🚀 No error found: committing this now.... ✨🚀'
 
 npx lint-staged
