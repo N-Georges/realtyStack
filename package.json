@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit --pretty",
     "lint": "next lint",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
     "postinstall": "husky install"
@@ -14,8 +14,7 @@
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
       "eslint --ignore-path .gitignore --fix",
-      "prettier --ignore-path .gitignore --write",
-      "tsc --noEmit --pretty"
+      "prettier --ignore-path .gitignore --write"
     ]
   },
   "dependencies": {
