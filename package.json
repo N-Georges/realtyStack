@@ -14,7 +14,8 @@
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
       "eslint --ignore-path .gitignore --fix",
-      "prettier --ignore-path .gitignore --write"
+      "prettier --ignore-path .gitignore --write",
+      "tsc --noEmit --pretty"
     ]
   },
   "dependencies": {
