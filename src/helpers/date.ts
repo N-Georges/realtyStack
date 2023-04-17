@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat"; // import plugin
-import "dayjs/locale/fr"; // import locale
+import "dayjs/locale/fr";
 
-dayjs.extend(customParseFormat); // use plugin
-dayjs.locale("fr"); // use locale
+dayjs.extend(customParseFormat);
+dayjs.locale("fr");
 
 export function currentDate() {
   return dayjs().format("ddd DD MMMM, YYYY");

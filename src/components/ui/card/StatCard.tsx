@@ -3,7 +3,7 @@ import clsx from "clsx";
 type cardStatProps = {
   size?: "full" | "fit";
   title: string;
-  subTitle: string | number | undefined;
+  count: number;
   color?: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
@@ -11,14 +11,14 @@ type cardStatProps = {
 const StatCard = ({
   size = "full",
   title,
-  subTitle,
-  color = "purple",
+  count,
+  color = "primary",
   Icon,
 }: cardStatProps) => {
   return (
     <div
       className={clsx(
-        "p-6 bg-white border rounded-lg w-fit snap-center border-grayLight",
+        "p-6 bg-white border rounded-lg w-fit snap-center border-secondaryLight",
         {
           "w-full": size === "full",
           "w-fit": size === "fit",
@@ -27,13 +27,13 @@ const StatCard = ({
     >
       <div className="flex items-center justify-between space-x-5">
         <div>
-          <p className="text-sm text-gray">{title}</p>
+          <p className="text-xs text-secondary">{title}</p>
 
-          <p className="text-2xl font-medium text-gray-900">{subTitle}</p>
+          <p className="text-2xl font-medium text-secondary-900">{count}</p>
         </div>
 
         <span className={`p-3 rounded-full text-${color} bg-${color}/10`}>
-          <Icon className="w-8 h-8" />
+          <Icon className="w-6 h-6" />
         </span>
       </div>
     </div>

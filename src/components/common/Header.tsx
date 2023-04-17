@@ -35,15 +35,15 @@ const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
-      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-2 bg-white border-b md:px-5 border-grayLight">
+      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-2 bg-white border-b md:px-5 border-secondaryLight">
         <div className="flex items-center space-x-10">
           <nav>
             <ul className="items-center hidden space-x-5 text-xs text-black md:flex whitespace-nowrap flex-nowrap">
               {nav.map((item) => (
                 <Link
-                  key={`item.name`}
+                  key={item.name}
                   href={item.path}
-                  className={clsx("px-3 py-2 cursor-pointer", {
+                  className={clsx("px-3 py-2 rounded-md cursor-pointer", {
                     btnActive: router.pathname == item.path,
                   })}
                 >
@@ -59,12 +59,12 @@ const Header = () => {
         >
           {sidebar ? (
             <LayoutSidebarRightExpand
-              className="w-8 h-8 text-gray group-hover:text-black"
+              className="w-8 h-8 text-secondary group-hover:text-black"
               strokeWidth={1}
             />
           ) : (
             <LayoutSidebarLeftExpand
-              className="w-8 h-8 text-gray group-hover:text-black"
+              className="w-8 h-8 text-secondary group-hover:text-black"
               strokeWidth={1}
             />
           )}
@@ -73,16 +73,16 @@ const Header = () => {
           <div className="items-center hidden space-x-5 lg:flex">
             <div className="relative w-full sm:block">
               <input
-                className="h-10 pl-10 pr-12 text-xs border-none rounded-md w-80 bg-grayLight placeholder:text-xs"
+                className="h-10 pl-10 pr-12 text-xs border-none rounded-md w-80 bg-secondaryLight placeholder:text-xs"
                 id="search"
                 type="search"
                 placeholder="What are you looking for"
               />
 
-              <div className="absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-md top-1/2 left-1">
+              <div className="absolute p-2 transition -translate-y-1/2 rounded-md text-secondary-600 top-1/2 left-1">
                 <Search className="w-5 h-5" strokeWidth={1.3} />
               </div>
-              <div className="absolute p-1 text-xs text-center text-white transition -translate-y-1/2 rounded-md right-2 bg-gray top-1/2">
+              <div className="absolute p-1 text-xs text-center text-white transition -translate-y-1/2 rounded-md right-2 bg-secondary top-1/2">
                 <kbd className="inline-flex items-center font-sans font-medium">
                   ⌘K
                 </kbd>
@@ -93,13 +93,13 @@ const Header = () => {
           <div className="flex gap-5">
             <button className="lg:hidden group">
               <Search
-                className="w-6 h-6 text-gray group-hover:text-black"
+                className="w-6 h-6 text-secondary group-hover:text-black"
                 strokeWidth={1}
               />
             </button>
             <button className="relative group">
               <Bell
-                className="w-6 h-6 text-gray group-hover:text-black"
+                className="w-6 h-6 text-secondary group-hover:text-black"
                 strokeWidth={1}
               />
               <span className="absolute block w-2 h-2 border border-white rounded-full right-1 bg-red top-2"></span>
@@ -119,7 +119,7 @@ const Header = () => {
               </div>
               <ChevronDown
                 className={clsx(
-                  "text-gray transition duration-300 group-hover:text-black",
+                  "text-secondary transition duration-300 group-hover:text-black",
                   {
                     "transform rotate-180": sidebar,
                   }
@@ -132,7 +132,7 @@ const Header = () => {
         </div>
       </div>
       {/* nav actions per page */}
-      <div className="sticky flex items-center px-2 text-black bg-white border-b top-20 h-14 md:px-5 border-grayLight">
+      <div className="sticky flex items-center px-2 text-black bg-white border-b top-20 h-14 md:px-5 border-secondaryLight">
         <div className="flex-1">
           <button
             onClick={() => setSidebar((prev) => !prev)}
@@ -141,7 +141,7 @@ const Header = () => {
             <p>Rental Management</p>
             <ChevronDown
               className={clsx(
-                "text-gray transition duration-300 group-hover:text-black",
+                "text-secondary transition duration-300 group-hover:text-black",
                 {
                   "transform rotate-180": sidebar,
                 }
@@ -152,7 +152,7 @@ const Header = () => {
           </button>
         </div>
         <div>
-          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md group whitespace-nowrap bg-purple/10 text-purple">
+          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md group whitespace-nowrap bg-primary/10 text-primary">
             <CirclePlus
               className="w-5 h-5 transition duration-500 group-hover:rotate-90"
               strokeWidth={1.3}

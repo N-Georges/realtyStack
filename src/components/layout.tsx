@@ -4,7 +4,6 @@ import Header from "./common/Header";
 
 const roboto = Inter({
   subsets: ["latin"],
-  weight: ["300", "500", "700"],
 });
 
 type Props = {
