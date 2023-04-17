@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btnActive {
+    @apply bg-purple/10 text-purple rounded-md;
+  }
+}

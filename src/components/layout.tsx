@@ -1,9 +1,10 @@
-import { ReactNode } from 'react';
-import { Inter } from 'next/font/google';
+import { ReactNode } from "react";
+import { Inter } from "next/font/google";
+import Header from "./common/Header";
 
 const roboto = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  subsets: ["latin"],
+  weight: ["300", "500", "700"],
 });
 
 type Props = {
@@ -13,7 +14,8 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <div className={roboto.className}>
-      <main>{children}</main>
+      <Header />
+      <main className="">{children}</main>
     </div>
   );
 };
