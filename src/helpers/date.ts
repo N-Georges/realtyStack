@@ -6,7 +6,10 @@ dayjs.extend(customParseFormat);
 dayjs.locale("fr");
 
 export function currentDate() {
-  return dayjs().format("ddd DD MMMM, YYYY");
+  return (
+    dayjs().format("ddd DD MMMM, YYYY").charAt(0).toUpperCase() +
+    dayjs().format("ddd DD MMMM, YYYY").slice(1)
+  );
 }
 
 export function currentDateTime() {

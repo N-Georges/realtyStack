@@ -38,19 +38,19 @@ const Header = () => {
       <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-2 bg-white border-b md:px-5 border-secondaryLight">
         <div className="flex items-center space-x-10">
           <nav>
-            <ul className="items-center hidden space-x-5 text-xs text-black md:flex whitespace-nowrap flex-nowrap">
+            <div className="items-center hidden space-x-5 text-xs text-black md:text-sm md:flex whitespace-nowrap flex-nowrap">
               {nav.map((item) => (
                 <Link
                   key={item.name}
                   href={item.path}
-                  className={clsx("px-3 py-2 rounded-md cursor-pointer", {
+                  className={clsx("px-2 py-2 rounded-md cursor-pointer", {
                     btnActive: router.pathname == item.path,
                   })}
                 >
                   {item.name}
                 </Link>
               ))}
-            </ul>
+            </div>
           </nav>
         </div>
         <button
@@ -69,11 +69,11 @@ const Header = () => {
             />
           )}
         </button>
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-5">
           <div className="items-center hidden space-x-5 lg:flex">
             <div className="relative w-full sm:block">
               <input
-                className="h-10 pl-10 pr-12 text-xs border-none rounded-md w-80 bg-secondaryLight placeholder:text-xs"
+                className="h-10 pl-10 pr-12 text-xs text-black border-none rounded-md placeholder:font-light w-80 bg-secondaryLight placeholder:text-xs"
                 id="search"
                 type="search"
                 placeholder="What are you looking for"
@@ -132,11 +132,11 @@ const Header = () => {
         </div>
       </div>
       {/* nav actions per page */}
-      <div className="sticky flex items-center px-2 text-black bg-white border-b top-20 h-14 md:px-5 border-secondaryLight">
+      <div className="sticky z-50 flex items-center px-2 text-black bg-white border-b top-20 h-14 md:px-5 border-secondaryLight">
         <div className="flex-1">
           <button
             onClick={() => setSidebar((prev) => !prev)}
-            className="flex items-center space-x-2 text-xs whitespace-nowrap group"
+            className="flex items-center space-x-2 text-xs md:text-sm whitespace-nowrap group"
           >
             <p>Rental Management</p>
             <ChevronDown
@@ -152,7 +152,7 @@ const Header = () => {
           </button>
         </div>
         <div>
-          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md group whitespace-nowrap bg-primary/10 text-primary">
+          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md md:text-sm group whitespace-nowrap bg-primary/10 text-primary">
             <CirclePlus
               className="w-5 h-5 transition duration-500 group-hover:rotate-90"
               strokeWidth={1.3}
