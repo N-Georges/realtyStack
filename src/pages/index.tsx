@@ -94,8 +94,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="grid grid-cols-3">
-      <section className="col-span-3 py-5 bg-white lg:col-span-2 md:pr-5">
+    <div className="flex">
+      <section className="w-full py-5 bg-white lg:w-2/3 md:pr-5">
         <div className="space-y-2">
           <p className="text-xs text-black md:text-xs ">{currentDate()}</p>
           <div>
@@ -117,227 +117,283 @@ export default function Home() {
             />
           ))}
         </div>
-
-        <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b snap-x top-32 whitespace-nowrap border-secondaryLight scrollbar-hide">
-          {Tab.map((tab, index) => (
-            <MenuTab
-              key={index}
-              title={tab.title}
-              Icon={tab.Icon}
-              activeTabIndex={activeTabIndex}
-              index={index}
-              notif={tab.notif}
-              countNotif={tab.countNotif}
-              handleClick={() => handleClickTab({ index })}
-            />
-          ))}
-        </div>
-        <div className="">
-          {Tab.map((tab, index) => (
-            <div
-              key={index}
-              className={clsx("w-full my-5", {
-                hidden: activeTabIndex !== index,
-              })}
-            >
-              {tab.content}
-            </div>
-          ))}
+        <div className="h-screen">
+          <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b snap-x top-32 whitespace-nowrap border-secondaryLight scrollbar-hide">
+            {Tab.map((tab, index) => (
+              <MenuTab
+                key={index}
+                title={tab.title}
+                Icon={tab.Icon}
+                activeTabIndex={activeTabIndex}
+                index={index}
+                notif={tab.notif}
+                countNotif={tab.countNotif}
+                handleClick={() => handleClickTab({ index })}
+              />
+            ))}
+          </div>
+          <div className="">
+            {Tab.map((tab, index) => (
+              <div
+                key={index}
+                className={clsx("w-full my-5", {
+                  hidden: activeTabIndex !== index,
+                })}
+              >
+                {tab.content}
+                {tab.content}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="hidden w-full col-span-1 pl-5 text-black bg-white border-l lg:inline-block md:py-5 border-secondaryLight">
-        <div className="flex items-center justify-between bg-white ">
-          <div className="flex items-center space-x-1">
-            <p className="">Active Properties</p>
-            <span>(118)</span>
+      <section className="hidden w-1/3 pl-5 text-black bg-white border-l overscroll-auto lg:inline-block md:py-5 border-secondaryLight">
+        <div className="">
+          <div className="flex items-center justify-between bg-white">
+            <div className="flex items-center space-x-1">
+              <p className="">Active Properties</p>
+              <span>(118)</span>
+            </div>
+            <button className="group">
+              <Search
+                className="w-6 h-6 text-secondary group-hover:text-black"
+                strokeWidth={1}
+              />
+            </button>
           </div>
-          <button className="group">
-            <Search
-              className="w-6 h-6 text-secondary group-hover:text-black"
-              strokeWidth={1}
-            />
-          </button>
-        </div>
-        <div className="divide-y divide-secondaryLight">
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
+          <div className="divide-y divide-secondaryLight">
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
                 </div>
               </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
+              </div>
+            </div>
+            <div className="py-5">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs text-black">
+                  20’ 1st floor Family building
+                </p>
+                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
+                  ACTIVE
+                </span>
+              </div>
+              <div className="flex items-center justify-between font-light">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>2 Tenant</p>
+                  </div>
+                  <div className="flex items-center space-x-1 text-xs text-secondary">
+                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
+                    <p>1 Request</p>
+                  </div>
+                </div>
+                <div className="text-xs text-black">
+                  <span>124 sq m</span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
+          <div>
+            <button className="text-xs text-black underline">
+              See 111 more
+            </button>
           </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
-          </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
-          </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
-          </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
-          </div>
-          <div className="py-5">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-black">
-                20’ 1st floor Family building
-              </p>
-              <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                ACTIVE
-              </span>
-            </div>
-            <div className="flex items-center justify-between font-light">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>2 Tenant</p>
-                </div>
-                <div className="flex items-center space-x-1 text-xs text-secondary">
-                  <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                  <p>1 Request</p>
-                </div>
-              </div>
-              <div className="text-xs text-black">
-                <span>124 sq m</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <button className="text-xs text-black underline">See 111 more</button>
         </div>
       </section>
     </div>

@@ -50,17 +50,6 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              {nav.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className={clsx("px-2 py-2 rounded-md cursor-pointer", {
-                    btnActive: router.pathname == item.path,
-                  })}
-                >
-                  {item.name}
-                </Link>
-              ))}
             </div>
           </nav>
         </div>
