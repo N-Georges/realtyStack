@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className={roboto.className}>
       <Header />
-      <main className="">{children}</main>
+      <main className="px-5 lg:px-20">{children}</main>
     </div>
   );
 };

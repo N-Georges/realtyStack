@@ -64,7 +64,7 @@ const Analytics = ({
   setSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className="">
+    <div>
       <div className="flex items-center justify-between">
         <p className="text-xl text-black md:text-2xl">Stats Overview</p>
         <div
@@ -73,7 +73,7 @@ const Analytics = ({
         >
           <a
             href="#"
-            className="px-4 py-2 font-light border-e text-secondary text-xs/none md:text-sm/none"
+            className="px-4 py-2 font-light border-e text-secondary text-xs/none md:text-xs/none"
           >
             Per - Month. Aug
           </a>

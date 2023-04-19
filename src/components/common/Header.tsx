@@ -35,10 +35,21 @@ const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
-      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-2 bg-white border-b md:px-5 border-secondaryLight">
+      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-5 bg-white border-b lg:px-20 border-secondaryLight">
         <div className="flex items-center space-x-10">
           <nav>
-            <div className="items-center hidden space-x-5 text-xs text-black md:text-sm md:flex whitespace-nowrap flex-nowrap">
+            <div className="items-center hidden space-x-5 text-xs text-black md:text-xs md:flex whitespace-nowrap flex-nowrap">
+              {nav.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  className={clsx("px-2 py-2 rounded-md cursor-pointer", {
+                    btnActive: router.pathname == item.path,
+                  })}
+                >
+                  {item.name}
+                </Link>
+              ))}
               {nav.map((item) => (
                 <Link
                   key={item.name}
@@ -73,9 +84,8 @@ const Header = () => {
           <div className="items-center hidden space-x-5 lg:flex">
             <div className="relative w-full sm:block">
               <input
-                className="h-10 pl-10 pr-12 text-xs text-black border-none rounded-md placeholder:font-light w-80 bg-secondaryLight placeholder:text-xs"
+                className="w-full h-10 pl-10 mr-20 text-xs text-black border-none rounded-md placeholder:font-light bg-secondaryLight placeholder:text-xs"
                 id="search"
-                type="search"
                 placeholder="What are you looking for"
               />
 
@@ -109,7 +119,7 @@ const Header = () => {
               onClick={() => setSidebar((prev) => !prev)}
               className="flex items-center space-x-2 group"
             >
-              <div className="relative w-7 h-7 md:w-8 md:h-8">
+              <div className="relative w-8 h-8">
                 <Image
                   src="/images/avatar.webp"
                   fill
@@ -132,13 +142,13 @@ const Header = () => {
         </div>
       </div>
       {/* nav actions per page */}
-      <div className="sticky z-50 flex items-center px-2 text-black bg-white border-b top-20 h-14 md:px-5 border-secondaryLight">
+      <div className="sticky z-50 flex items-center px-5 text-black bg-white border-b top-20 h-14 lg:px-20 border-secondaryLight">
         <div className="flex-1">
           <button
             onClick={() => setSidebar((prev) => !prev)}
-            className="flex items-center space-x-2 text-xs md:text-sm whitespace-nowrap group"
+            className="flex items-center space-x-2 text-xs md:text-xs whitespace-nowrap group"
           >
-            <p>Rental Management</p>
+            <p>Apartment</p>
             <ChevronDown
               className={clsx(
                 "text-secondary transition duration-300 group-hover:text-black",
@@ -152,7 +162,7 @@ const Header = () => {
           </button>
         </div>
         <div>
-          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md md:text-sm group whitespace-nowrap bg-primary/10 text-primary">
+          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md md:text-xs group whitespace-nowrap bg-primary/10 text-primary">
             <CirclePlus
               className="w-5 h-5 transition duration-500 group-hover:rotate-90"
               strokeWidth={1.3}
