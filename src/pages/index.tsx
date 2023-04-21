@@ -1,9 +1,9 @@
-import Analytics from "@/components/common/Analytics";
 import MenuTab from "@/components/common/MenuTab";
+import Layout from "@/components/layout";
 import StatCard from "@/components/ui/card/StatCard";
 import { currentDate } from "@/helpers/date";
 import NumberCountAnimation from "@/helpers/number-count-animation";
-// import { useHorizontalScroll } from "@/utils/useSideScroll";
+import { useHorizontalScroll } from "@/utils/useSideScroll";
 import clsx from "clsx";
 import { useState } from "react";
 import {
@@ -14,20 +14,43 @@ import {
   FileTime,
   HexagonLetterA,
   FileText,
-  Tool,
   InfoCircle,
   AlignBoxBottomCenter,
-  UserCircle,
   MessageCircle,
+  Key,
 } from "tabler-icons-react";
+import { Properties } from "../../mock_data";
+import PropertyCard from "@/components/common/PropertyCard";
+import About from "@/components/About";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 export default function Home() {
   const [sidebar, setSidebar] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  // const scrollRef = useHorizontalScroll();
+  const [propertyData, setPropertyData] = useState(
+    Properties.filter((property) => property.active === true).map(
+      (property) => {
+        return {
+          ...property,
+        };
+      }
+    )
+  );
+  const [activePropertyIndex, setActivePropertyIndex] = useState(0);
+  const [activeProperty, setActiveProperty] = useState(
+    propertyData[activePropertyIndex]
+  );
+  console.log(activePropertyIndex);
+
+  const scrollRef = useHorizontalScroll();
 
   const handleClickTab = ({ index }: { index: number }) => {
     setActiveTabIndex(index);
+  };
+
+  const handleClickProperty = ({ index }: { index: number }) => {
+    setActivePropertyIndex(index);
+    setActiveProperty(propertyData[index]);
   };
 
   const stats = [
@@ -60,7 +83,7 @@ export default function Home() {
     {
       title: "About",
       Icon: HexagonLetterA,
-      content: "about",
+      content: <About {...activeProperty} />,
     },
     {
       title: "Agreement",
@@ -76,7 +99,7 @@ export default function Home() {
     },
     {
       title: "Maintenance Request",
-      Icon: Tool,
+      Icon: Key,
       content: "maintenance",
     },
     {
@@ -89,313 +112,132 @@ export default function Home() {
     {
       title: "Analytics",
       Icon: AlignBoxBottomCenter,
-      content: <Analytics sidebar={sidebar} setSidebar={setSidebar} />,
+      content: "analytics",
     },
   ];
 
   return (
-    <div className="flex">
-      <section className="w-full py-5 bg-white lg:w-2/3 md:pr-5">
-        <div className="space-y-2">
-          <p className="text-xs text-black md:text-xs ">{currentDate()}</p>
-          <div>
-            <p className="text-xl text-black md:text-2xl">
-              Welcome back, Georges
+    <Layout>
+      <div className="flex">
+        <section className="w-full py-5 bg-white lg:w-2/3 lg:pr-5">
+          <div className="space-y-2">
+            <p className="text-xs text-black md:text-xs ">{currentDate()}</p>
+            <div>
+              <p className="text-xl text-black md:text-2xl">
+                Welcome back, Georges
+              </p>
+            </div>
+            <p className="text-xs font-light text-secondary md:text-xs">
+              This is property portfolio report.
             </p>
           </div>
-          <p className="text-xs font-light text-secondary md:text-xs">
-            This is property portfolio report.
-          </p>
-        </div>
-        <div className="flex items-center justify-between w-full gap-5 mt-5 overflow-x-auto snap-x scrollbar-hide whitespace-nowrap">
-          {stats.map((stat, index) => (
-            <StatCard
-              key={index}
-              title={stat.title}
-              count={NumberCountAnimation({ targetNumber: stat.count })}
-              Icon={stat.Icon}
-            />
-          ))}
-        </div>
-        <div className="h-screen">
-          <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b snap-x top-32 whitespace-nowrap border-secondaryLight scrollbar-hide">
-            {Tab.map((tab, index) => (
-              <MenuTab
+          <div className="flex items-center justify-between w-full gap-5 mt-5 overflow-x-auto snap-x scrollbar-hide whitespace-nowrap">
+            {stats.map((stat, index) => (
+              <StatCard
                 key={index}
-                title={tab.title}
-                Icon={tab.Icon}
-                activeTabIndex={activeTabIndex}
-                index={index}
-                notif={tab.notif}
-                countNotif={tab.countNotif}
-                handleClick={() => handleClickTab({ index })}
+                title={stat.title}
+                count={NumberCountAnimation({ targetNumber: stat.count })}
+                Icon={stat.Icon}
               />
             ))}
           </div>
           <div className="">
-            {Tab.map((tab, index) => (
-              <div
-                key={index}
-                className={clsx("w-full my-5", {
-                  hidden: activeTabIndex !== index,
-                })}
-              >
-                {tab.content}
-                {tab.content}
-              </div>
-            ))}
+            <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b border-gray-100 snap-x top-32 whitespace-nowrap scrollbar-hide">
+              {Tab.map((tab, index) => (
+                <MenuTab
+                  key={index}
+                  title={tab.title}
+                  Icon={tab.Icon}
+                  activeTabIndex={activeTabIndex}
+                  index={index}
+                  notif={tab.notif}
+                  countNotif={tab.countNotif}
+                  handleClick={() => handleClickTab({ index })}
+                />
+              ))}
+            </div>
+            <div className="">
+              <ScrollArea.Root className="w-full h-[29rem] overflow-hidden ">
+                <ScrollArea.Viewport className="w-full h-full ">
+                  {Tab.map((tab, index) => (
+                    <div
+                      key={index}
+                      className={clsx("w-full h-screen my-5", {
+                        hidden: activeTabIndex !== index,
+                      })}
+                    >
+                      {tab.content}
+                    </div>
+                  ))}
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar
+                  className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                  orientation="vertical"
+                >
+                  <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Scrollbar
+                  className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                  orientation="horizontal"
+                >
+                  <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Corner className="bg-blackA8" />
+              </ScrollArea.Root>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="hidden w-1/3 pl-5 text-black bg-white border-l overscroll-auto lg:inline-block md:py-5 border-secondaryLight">
-        <div className="">
-          <div className="flex items-center justify-between bg-white">
-            <div className="flex items-center space-x-1">
-              <p className="">Active Properties</p>
-              <span>(118)</span>
+        <section className="hidden w-1/3 text-black bg-white border-l border-gray-100 overscroll-auto lg:inline-block md:py-5">
+          <div className="">
+            <div className="flex items-center justify-between pl-5 mb-5 bg-white">
+              <div className="flex items-center space-x-1">
+                <p className="">Active Properties</p>
+                <span>(118)</span>
+              </div>
+              <button className="group">
+                <Search
+                  className="w-6 h-6 text-secondary group-hover:text-black"
+                  strokeWidth={1}
+                />
+              </button>
             </div>
-            <button className="group">
-              <Search
-                className="w-6 h-6 text-secondary group-hover:text-black"
-                strokeWidth={1}
-              />
-            </button>
-          </div>
-          <div className="divide-y divide-secondaryLight">
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
+            <ScrollArea.Root className="w-full scrollbar-hide overflow-hidden h-[40rem]">
+              <ScrollArea.Viewport className="w-full h-full ">
+                <div className="divide-y divide-gray-50">
+                  {propertyData.slice(0, 8).map((property, index) => (
+                    <PropertyCard
+                      key={index}
+                      property={property}
+                      activePropertyIndex={activePropertyIndex}
+                      index={index}
+                      handleClick={() => handleClickProperty({ index: index })}
+                    />
+                  ))}
                 </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
-            </div>
-            <div className="py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-black">
-                  20’ 1st floor Family building
-                </p>
-                <span className="px-3 py-1 text-xs rounded-full bg-green/10 text-green">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="flex items-center justify-between font-light">
-                <div className="flex items-center space-x-5">
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <UserCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>2 Tenant</p>
-                  </div>
-                  <div className="flex items-center space-x-1 text-xs text-secondary">
-                    <InfoCircle className="w-5 h-5" strokeWidth={1.3} />
-                    <p>1 Request</p>
-                  </div>
-                </div>
-                <div className="text-xs text-black">
-                  <span>124 sq m</span>
-                </div>
-              </div>
+              </ScrollArea.Viewport>
+              <ScrollArea.Scrollbar
+                className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                orientation="vertical"
+              >
+                <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+              </ScrollArea.Scrollbar>
+              <ScrollArea.Scrollbar
+                className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                orientation="horizontal"
+              >
+                <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+              </ScrollArea.Scrollbar>
+              <ScrollArea.Corner className="bg-blackA8" />
+            </ScrollArea.Root>
+            <div>
+              <button className="pl-5 mt-5 text-xs text-black underline">
+                {` See ${Properties.length - 8} more`}
+              </button>
             </div>
           </div>
-          <div>
-            <button className="text-xs text-black underline">
-              See 111 more
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Layout>
   );
 }

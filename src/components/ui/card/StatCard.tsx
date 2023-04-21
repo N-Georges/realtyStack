@@ -18,7 +18,7 @@ const StatCard = ({
   return (
     <div
       className={clsx(
-        "p-6 bg-white border rounded-lg w-fit snap-center border-secondaryLight",
+        "p-6 bg-white border rounded-lg w-fit snap-center border-gray-100",
         {
           "w-full": size === "full",
           "w-fit": size === "fit",
@@ -27,14 +27,12 @@ const StatCard = ({
     >
       <div className="flex items-center justify-between space-x-5">
         <div>
-          <p className="text-xs font-light md:text-xs text-secondary">
-            {title}
-          </p>
+          <p className="text-xs font-light text-gray-500 md:text-xs">{title}</p>
 
           <p className="text-2xl font-medium text-secondary-900">{count}</p>
         </div>
 
-        <span className={`p-2 rounded-full text-${color} bg-${color}/10`}>
+        <span className={`p-2 rounded-full text-primary bg-primary/10`}>
           <Icon className="w-5 h-5" strokeWidth={1.3} />
         </span>
       </div>

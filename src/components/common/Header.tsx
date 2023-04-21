@@ -24,8 +24,13 @@ const nav = [
     active: false,
   },
   {
-    name: "Deposits",
-    path: "/deposits",
+    name: "Accounting",
+    path: "/accounting",
+    active: false,
+  },
+  {
+    name: "Calendar",
+    path: "/calendar",
     active: false,
   },
 ];
@@ -35,7 +40,7 @@ const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
-      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-5 bg-white border-b lg:px-20 border-secondaryLight">
+      <div className="sticky top-0 z-50 flex items-center justify-between h-20 max-w-6xl px-5 mx-auto bg-white border-b border-gray-100">
         <div className="flex items-center space-x-10">
           <nav>
             <div className="items-center hidden space-x-5 text-xs text-black md:text-xs md:flex whitespace-nowrap flex-nowrap">
@@ -73,16 +78,16 @@ const Header = () => {
           <div className="items-center hidden space-x-5 lg:flex">
             <div className="relative w-full sm:block">
               <input
-                className="w-full h-10 pl-10 mr-20 text-xs text-black border-none rounded-md placeholder:font-light bg-secondaryLight placeholder:text-xs"
+                className="w-full h-10 pl-10 pr-12 text-xs text-black border-none rounded-md bg-gray-50 placeholder:font-light placeholder:text-xs"
                 id="search"
                 placeholder="What are you looking for"
               />
 
-              <div className="absolute p-2 transition -translate-y-1/2 rounded-md text-secondary-600 top-1/2 left-1">
+              <div className="absolute p-2 text-gray-500 transition -translate-y-1/2 rounded-md top-1/2 left-1">
                 <Search className="w-5 h-5" strokeWidth={1.3} />
               </div>
-              <div className="absolute p-1 text-xs text-center text-white transition -translate-y-1/2 rounded-md right-2 bg-secondary top-1/2">
-                <kbd className="inline-flex items-center font-sans font-medium">
+              <div className="absolute p-1 text-xs text-center text-white transition -translate-y-1/2 bg-gray-500 rounded-md right-2 top-1/2">
+                <kbd className="inline-flex items-center font-sans font-bold">
                   ⌘K
                 </kbd>
               </div>
@@ -131,7 +136,7 @@ const Header = () => {
         </div>
       </div>
       {/* nav actions per page */}
-      <div className="sticky z-50 flex items-center px-5 text-black bg-white border-b top-20 h-14 lg:px-20 border-secondaryLight">
+      <div className="sticky z-50 flex items-center max-w-6xl px-5 mx-auto text-black bg-white border-b border-gray-100 top-20 h-14">
         <div className="flex-1">
           <button
             onClick={() => setSidebar((prev) => !prev)}
