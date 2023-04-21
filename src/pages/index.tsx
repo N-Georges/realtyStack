@@ -28,19 +28,19 @@ export default function Home() {
   const [sidebar, setSidebar] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [propertyData, setPropertyData] = useState(
-    Properties.filter((property) => property.active === true).map(
-      (property) => {
+    Properties.filter((property) => property.active === true)
+      .slice(0, 8)
+      .map((property) => {
         return {
           ...property,
         };
-      }
-    )
+      })
   );
+
   const [activePropertyIndex, setActivePropertyIndex] = useState(0);
   const [activeProperty, setActiveProperty] = useState(
     propertyData[activePropertyIndex]
   );
-  console.log(activePropertyIndex);
 
   const scrollRef = useHorizontalScroll();
 
@@ -51,6 +51,18 @@ export default function Home() {
   const handleClickProperty = ({ index }: { index: number }) => {
     setActivePropertyIndex(index);
     setActiveProperty(propertyData[index]);
+  };
+
+  const handleMoreProperty = () => {
+    setPropertyData(
+      Properties.filter((property) => property.active === true)
+        .slice(0, propertyData.length + 10)
+        .map((property) => {
+          return {
+            ...property,
+          };
+        })
+    );
   };
 
   const stats = [
@@ -142,7 +154,7 @@ export default function Home() {
             ))}
           </div>
           <div className="">
-            <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b border-gray-100 snap-x top-32 whitespace-nowrap scrollbar-hide">
+            <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b border-gray-100 snap-x whitespace-nowrap scrollbar-hide">
               {Tab.map((tab, index) => (
                 <MenuTab
                   key={index}
@@ -158,7 +170,7 @@ export default function Home() {
             </div>
             <div className="">
               <ScrollArea.Root className="w-full h-[29rem] overflow-hidden ">
-                <ScrollArea.Viewport className="w-full h-full ">
+                <ScrollArea.Viewport className="w-full ">
                   {Tab.map((tab, index) => (
                     <div
                       key={index}
@@ -202,10 +214,10 @@ export default function Home() {
                 />
               </button>
             </div>
-            <ScrollArea.Root className="w-full scrollbar-hide overflow-hidden h-[40rem]">
+            <ScrollArea.Root className="w-full scrollbar-hide overflow-hidden h-[43rem]">
               <ScrollArea.Viewport className="w-full h-full ">
                 <div className="divide-y divide-gray-50">
-                  {propertyData.slice(0, 8).map((property, index) => (
+                  {propertyData.map((property, index) => (
                     <PropertyCard
                       key={index}
                       property={property}
@@ -214,6 +226,17 @@ export default function Home() {
                       handleClick={() => handleClickProperty({ index: index })}
                     />
                   ))}
+                  {Properties.filter((property) => property.active === true)
+                    .length !== propertyData.length && (
+                    <div>
+                      <button
+                        onClick={handleMoreProperty}
+                        className="pl-5 mt-5 text-xs text-black underline"
+                      >
+                        {` See more`}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </ScrollArea.Viewport>
               <ScrollArea.Scrollbar
@@ -230,11 +253,6 @@ export default function Home() {
               </ScrollArea.Scrollbar>
               <ScrollArea.Corner className="bg-blackA8" />
             </ScrollArea.Root>
-            <div>
-              <button className="pl-5 mt-5 text-xs text-black underline">
-                {` See ${Properties.length - 8} more`}
-              </button>
-            </div>
           </div>
         </section>
       </div>
