@@ -12,7 +12,7 @@ const StatCard = ({
   size = "full",
   title,
   count,
-  color = "primary",
+  color = "blue-500",
   Icon,
 }: cardStatProps) => {
   return (
@@ -29,10 +29,10 @@ const StatCard = ({
         <div>
           <p className="text-xs font-light text-gray-500 md:text-xs">{title}</p>
 
-          <p className="text-2xl font-medium text-secondary-900">{count}</p>
+          <p className="text-2xl font-medium text-gray-500-900">{count}</p>
         </div>
 
-        <span className={`p-2 rounded-full text-primary bg-primary/10`}>
+        <span className={`p-2 rounded-full text-blue-500 bg-blue-500/10`}>
           <Icon className="w-5 h-5" strokeWidth={1.3} />
         </span>
       </div>

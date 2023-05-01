@@ -4,7 +4,7 @@
 
 @layer components {
   .btnActive {
-    @apply bg-primary/10 text-primary rounded-md;
+    @apply bg-blue-500/10 text-blue-500 rounded-md;
   }
 }
 

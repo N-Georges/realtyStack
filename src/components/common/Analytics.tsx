@@ -73,15 +73,15 @@ const Analytics = ({
         >
           <a
             href="#"
-            className="px-4 py-2 font-light border-e text-secondary text-xs/none md:text-xs/none"
+            className="px-4 py-2 font-light border-e text-gray-500 text-xs/none md:text-xs/none"
           >
             Per - Month. Aug
           </a>
 
-          <button className="h-full p-2 text-secondary group hover:text-black">
+          <button className="h-full p-2 text-gray-500 group hover:text-black">
             <ChevronDown
               className={clsx(
-                "text-secondary transition duration-300 group-hover:text-black",
+                "text-gray-500 transition duration-300 group-hover:text-black",
                 {
                   "transform rotate-180": sidebar,
                 }

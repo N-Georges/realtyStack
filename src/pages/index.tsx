@@ -3,7 +3,7 @@ import Layout from "@/components/layout";
 import StatCard from "@/components/ui/card/StatCard";
 import { currentDate } from "@/helpers/date";
 import NumberCountAnimation from "@/helpers/number-count-animation";
-import { useHorizontalScroll } from "@/utils/useSideScroll";
+// import { useHorizontalScroll } from "@/utils/useSideScroll";
 import clsx from "clsx";
 import { useState } from "react";
 import {
@@ -25,7 +25,7 @@ import About from "@/components/About";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 export default function Home() {
-  const [sidebar, setSidebar] = useState(false);
+  // const [sidebar, setSidebar] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [propertyData, setPropertyData] = useState(
     Properties.filter((property) => property.active === true)
@@ -42,7 +42,7 @@ export default function Home() {
     propertyData[activePropertyIndex]
   );
 
-  const scrollRef = useHorizontalScroll();
+  // const scrollRef = useHorizontalScroll();
 
   const handleClickTab = ({ index }: { index: number }) => {
     setActiveTabIndex(index);
@@ -74,19 +74,19 @@ export default function Home() {
     {
       title: "On hold Deposits",
       count: 7,
-      color: "primary",
+      color: "blue-500",
       Icon: Cash,
     },
     {
       title: "Total Tenant",
       count: 118,
-      color: "primary",
+      color: "blue-500",
       Icon: Users,
     },
     {
       title: "Pending Inspections",
       count: 13,
-      color: "primary",
+      color: "blue-500",
       Icon: FileTime,
     },
   ];
@@ -139,7 +139,7 @@ export default function Home() {
                 Welcome back, Georges
               </p>
             </div>
-            <p className="text-xs font-light text-secondary md:text-xs">
+            <p className="text-xs font-light text-gray-500 md:text-xs">
               This is property portfolio report.
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function Home() {
               />
             ))}
           </div>
-          <div className="">
+          <div>
             <div className="sticky z-30 flex w-full pb-px overflow-x-scroll bg-white border-b border-gray-100 snap-x whitespace-nowrap scrollbar-hide">
               {Tab.map((tab, index) => (
                 <MenuTab
@@ -168,54 +168,59 @@ export default function Home() {
                 />
               ))}
             </div>
-            <div className="">
-              <ScrollArea.Root className="w-full h-[29rem] overflow-hidden ">
-                <ScrollArea.Viewport className="w-full ">
-                  {Tab.map((tab, index) => (
-                    <div
-                      key={index}
-                      className={clsx("w-full h-screen my-5", {
-                        hidden: activeTabIndex !== index,
-                      })}
-                    >
-                      {tab.content}
-                    </div>
-                  ))}
-                </ScrollArea.Viewport>
-                <ScrollArea.Scrollbar
-                  className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-                  orientation="vertical"
-                >
-                  <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Scrollbar
-                  className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-                  orientation="horizontal"
-                >
-                  <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Corner className="bg-blackA8" />
-              </ScrollArea.Root>
-            </div>
+            <ScrollArea.Root className="w-full h-[29rem] overflow-hidden">
+              <ScrollArea.Viewport className="w-full h-full scroll-smooth">
+                {Tab.map((tab, index) => (
+                  <div
+                    key={index}
+                    className={clsx("w-full h-screen my-5", {
+                      hidden: activeTabIndex !== index,
+                    })}
+                  >
+                    {tab.content}
+                  </div>
+                ))}
+              </ScrollArea.Viewport>
+              <ScrollArea.Scrollbar
+                className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                orientation="vertical"
+              >
+                <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+              </ScrollArea.Scrollbar>
+              <ScrollArea.Scrollbar
+                className="flex select-none touch-none p-0.5 bg-blackA6 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                orientation="horizontal"
+              >
+                <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+              </ScrollArea.Scrollbar>
+              <ScrollArea.Corner className="bg-blackA8" />
+            </ScrollArea.Root>
           </div>
         </section>
 
         <section className="hidden w-1/3 text-black bg-white border-l border-gray-100 overscroll-auto lg:inline-block md:py-5">
-          <div className="">
+          <div>
             <div className="flex items-center justify-between pl-5 mb-5 bg-white">
               <div className="flex items-center space-x-1">
                 <p className="">Active Properties</p>
-                <span>(118)</span>
+                <span>
+                  (
+                  {
+                    Properties.filter((property) => property.active === true)
+                      .length
+                  }
+                  )
+                </span>
               </div>
               <button className="group">
                 <Search
-                  className="w-6 h-6 text-secondary group-hover:text-black"
+                  className="w-6 h-6 text-gray-500 group-hover:text-black"
                   strokeWidth={1}
                 />
               </button>
             </div>
-            <ScrollArea.Root className="w-full scrollbar-hide overflow-hidden h-[43rem]">
-              <ScrollArea.Viewport className="w-full h-full ">
+            <ScrollArea.Root className="w-full scroll-smooth scrollbar-hide overflow-hidden h-[43rem]">
+              <ScrollArea.Viewport className="w-full h-full">
                 <div className="divide-y divide-gray-50">
                   {propertyData.map((property, index) => (
                     <PropertyCard

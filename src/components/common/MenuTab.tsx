@@ -34,7 +34,7 @@ const MenuTab = ({
           <Icon className="flex-shrink-0 w-5 h-5" strokeWidth={1.3} />
           <span>{title}</span>
           {notif && (
-            <span className="flex items-center justify-center px-1 text-xs font-medium text-white rounded-md bg-red">
+            <span className="flex items-center justify-center px-1 text-xs font-medium text-white bg-red-500 rounded-md">
               {countNotif > 99 ? "99+" : countNotif}
             </span>
           )}

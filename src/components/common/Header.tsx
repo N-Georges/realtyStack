@@ -40,7 +40,7 @@ const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
-      <div className="sticky top-0 z-50 flex items-center justify-between h-20 max-w-6xl px-5 mx-auto bg-white border-b border-gray-100">
+      <div className="sticky top-0 z-50 flex items-center justify-between h-20 px-5 mx-auto bg-white border-b border-gray-100 ">
         <div className="flex items-center space-x-10">
           <nav>
             <div className="items-center hidden space-x-5 text-xs text-black md:text-xs md:flex whitespace-nowrap flex-nowrap">
@@ -64,12 +64,12 @@ const Header = () => {
         >
           {sidebar ? (
             <LayoutSidebarRightExpand
-              className="w-8 h-8 text-secondary group-hover:text-black"
+              className="w-8 h-8 text-gray-500 group-hover:text-black"
               strokeWidth={1}
             />
           ) : (
             <LayoutSidebarLeftExpand
-              className="w-8 h-8 text-secondary group-hover:text-black"
+              className="w-8 h-8 text-gray-500 group-hover:text-black"
               strokeWidth={1}
             />
           )}
@@ -97,16 +97,16 @@ const Header = () => {
           <div className="flex gap-5">
             <button className="lg:hidden group">
               <Search
-                className="w-6 h-6 text-secondary group-hover:text-black"
+                className="w-6 h-6 text-gray-500 group-hover:text-black"
                 strokeWidth={1}
               />
             </button>
             <button className="relative group">
               <Bell
-                className="w-6 h-6 text-secondary group-hover:text-black"
+                className="w-6 h-6 text-gray-500 group-hover:text-black"
                 strokeWidth={1}
               />
-              <span className="absolute block w-2 h-2 border border-white rounded-full right-1 bg-red top-2"></span>
+              <span className="absolute block w-2 h-2 bg-red-500 border border-white rounded-full right-1 top-2"></span>
             </button>
 
             <button
@@ -123,7 +123,7 @@ const Header = () => {
               </div>
               <ChevronDown
                 className={clsx(
-                  "text-secondary transition duration-300 group-hover:text-black",
+                  "text-gray-500 transition duration-300 group-hover:text-black",
                   {
                     "transform rotate-180": sidebar,
                   }
@@ -136,7 +136,7 @@ const Header = () => {
         </div>
       </div>
       {/* nav actions per page */}
-      <div className="sticky z-50 flex items-center max-w-6xl px-5 mx-auto text-black bg-white border-b border-gray-100 top-20 h-14">
+      <div className="sticky z-50 flex items-center px-5 mx-auto text-black bg-white border-b border-gray-100 top-20 h-14">
         <div className="flex-1">
           <button
             onClick={() => setSidebar((prev) => !prev)}
@@ -145,7 +145,7 @@ const Header = () => {
             <p>Apartment</p>
             <ChevronDown
               className={clsx(
-                "text-secondary transition duration-300 group-hover:text-black",
+                "text-gray-500 transition duration-300 group-hover:text-black",
                 {
                   "transform rotate-180": sidebar,
                 }
@@ -156,7 +156,7 @@ const Header = () => {
           </button>
         </div>
         <div>
-          <button className="flex items-center px-3 py-2 space-x-2 text-xs rounded-md md:text-xs group whitespace-nowrap bg-primary/10 text-primary">
+          <button className="flex items-center px-3 py-2 space-x-2 text-xs text-blue-500 rounded-md md:text-xs group whitespace-nowrap bg-blue-500/10">
             <CirclePlus
               className="w-5 h-5 transition duration-500 group-hover:rotate-90"
               strokeWidth={1.3}
